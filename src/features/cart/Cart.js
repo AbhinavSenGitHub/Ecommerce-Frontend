@@ -2,8 +2,6 @@ import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   increment,
-  incrementAsync,
-  selectCount,
 } from './cartSlice';
 import ProductList from '../product-list/components/ProductList'
 import { Dialog, Transition } from '@headlessui/react'
@@ -36,8 +34,6 @@ const products = [
 
 export default function Cart() {
   const [open, setOpen] = useState(true)
-
-  const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
   return (
