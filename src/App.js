@@ -13,6 +13,10 @@ import {
 } from "react-router-dom";
 import ProductDetailsPage from './features/pages/ProductDetailsPage';
 import Protected from "../src/features/auth/components/Protected"
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fecthItemsByUserIdAsync } from './features/cart/cartSlice';
+import { selectLoggedInUser } from './features/auth/authSlice';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +52,13 @@ const router = createBrowserRouter([
   // },
 ]);
 function App() {
+  const user = useSelector(selectLoggedInUser)
+  const dispatch = useDispatch()
+  useEffect(() => {
+  if(user){    
+      dispatch(fecthItemsByUserIdAsync(user.id))   
+  }
+}, [dispatch, user])
   return (
     <div className="App">
       <RouterProvider router={router} />
