@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addtoCart, deleteItemFromCart, fecthItemsByUserId, updateCart } from './cartAPI';
+import { addtoCart, deleteItemFromCart, fecthItemsByUserId, resetCart, updateCart } from './cartAPI';
 
 const initialState = {
   status:'idle',
@@ -18,8 +18,7 @@ export const addToCartAsync = createAsyncThunk(
 export const fecthItemsByUserIdAsync = createAsyncThunk(
   'cart/fecthItemsByUserId',
   async (userId) => {
-    const response = await fecthItemsByUserId(userId);
-    // The value we return becomes the `fulfilled` action payload
+    const response = await fecthItemsByUserId(userId)
     return response.data;
   }
 )
@@ -27,8 +26,7 @@ export const fecthItemsByUserIdAsync = createAsyncThunk(
 export const updateCartAsync = createAsyncThunk(
   'cart/updateCart',
   async (update) => {
-    const response = await updateCart(update);
-    // The value we return becomes the `fulfilled` action payload
+    const response = await updateCart(update)
     return response.data;
   }
 )
@@ -36,8 +34,15 @@ export const updateCartAsync = createAsyncThunk(
 export const deleteItemFromCartAsync = createAsyncThunk(
   'cart/deleteItemFromCart',
   async (itemId) => {
-    const response = await deleteItemFromCart(itemId);
-    // The value we return becomes the `fulfilled` action payload
+    const response = await deleteItemFromCart(itemId)
+    return response.data;
+  }
+)
+// reset cart
+export const resetCartAsync = createAsyncThunk(
+  'cart/resetCart',
+  async (userId) => {
+    const response = await resetCart(userId)
     return response.data;
   }
 )
@@ -81,6 +86,13 @@ export const cartSlice = createSlice({
         state.status = 'idle';
         const index = state.items.findIndex(item => item.id === action.payload.id)
         state.items.splice(index,1)
+      })
+      .addCase(resetCartAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(resetCartAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.items = []
       })
   },
 })

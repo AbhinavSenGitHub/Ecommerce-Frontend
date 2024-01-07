@@ -7,22 +7,23 @@ import {
 // import itemList from '../item-list/components/itemList'
 // import { Dialog, Transition } from '@headlessui/react'
 // import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function Cart() {
   const [open, setOpen] = useState(true)
   const items = useSelector(selectedItem)
-  const totalAmount = items.reduce((amount, item) => item.price*item.quantity + amount, 0) 
+  const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
   const totalItems = items.reduce((total, item) => item.quantity + total, 0)
   const dispatch = useDispatch();
   const handleUpdate = (e, item) => {
-    dispatch(updateCartAsync({...item, quantity: +e.target.value  }))
+    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }))
   }
-  const handleRemove= (e, id) => {
+  const handleRemove = (e, id) => {
     dispatch(deleteItemFromCartAsync(id))
   }
   return (
     <>
+    {!items.length && <Navigate to='/'></Navigate>}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <h1 className="text-4xl my-7 font-bold tracking-tight text-gray-900">Cart</h1>
@@ -54,7 +55,7 @@ export default function Cart() {
                         <label htmlFor="quantity" className="inline mr-5 text-sm font-medium leading-6 text-gray-900">
                           Qty
                         </label>
-                        <select className="text-sm font-medium" onChange={(e)=>handleUpdate(e, item)}>
+                        <select className="text-sm font-medium" onChange={(e) => handleUpdate(e, item)}>
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -63,7 +64,7 @@ export default function Cart() {
 
                       <div className="flex">
                         <button
-                          onClick={(e)=> handleRemove(e, item.id)}
+                          onClick={(e) => handleRemove(e, item.id)}
                           type="button"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >

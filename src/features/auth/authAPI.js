@@ -11,7 +11,6 @@ export function createUser(userData) {
   }
   )
 }
-
 // login
 export function checkUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
@@ -19,7 +18,6 @@ export function checkUser(loginInfo) {
     const password = loginInfo.password
     const responce = await fetch("http://localhost:8080/users?email="+email)
     const data = await responce.json()
-    console.log({ data })
     if (data.length) {
       // if data has some length then check following fields
       if (password === data[0].password) {
@@ -30,6 +28,19 @@ export function checkUser(loginInfo) {
     } else {
       reject({ message: "user not fount" })
     }
+  }
+  )
+}
+// update user for checkout
+export function updateUser(update) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/users/" + update.id, {
+      method: "PATCH",
+      body: JSON.stringify(update),
+      headers: { "content-type": "application/json" }
+    })
+    const data = await response.json()
+    resolve({ data })
   }
   )
 }

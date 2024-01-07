@@ -2338,35 +2338,42 @@
     {
       "email": "user13@gmail.com",
       "password": "User@133",
+      "addresses": [
+        {
+          "name": "supra",
+          "email": "user13@gmail.com",
+          "phone": "9867675653",
+          "street": "J.K.Road ",
+          "city": "Bhopal",
+          "state": "Madhya pradesh",
+          "pinCode": "462023"
+        },
+        {
+          "name": "supra",
+          "email": "user06@gmail.com",
+          "phone": "745353556",
+          "street": "M.G.Road",
+          "city": "Bhopal",
+          "state": "Madhya pradesh",
+          "pinCode": "456543"
+        }
+      ],
       "id": 1
     },
     {
       "email": "user14@gmail.com",
       "password": "User@144",
+      "addresses": [],
       "id": 2
+    },
+    {
+      "email": "user06@gmail.com",
+      "password": "User@066",
+      "addresses": [],
+      "id": 3
     }
   ],
   "cart": [
-    {
-      "id": 2,
-      "title": "iPhone X",
-      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-      "price": 899,
-      "discountPercentage": 17.94,
-      "rating": 4.44,
-      "stock": 34,
-      "brand": "Apple",
-      "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/2/1.jpg",
-        "https://i.dummyjson.com/data/products/2/2.jpg",
-        "https://i.dummyjson.com/data/products/2/3.jpg",
-        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-      ],
-      "quantity": 1,
-      "user": 1
-    },
     {
       "id": 3,
       "title": "Samsung Universe 9",
@@ -2383,26 +2390,273 @@
       ],
       "quantity": 1,
       "user": 2
+    }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 2,
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "id": 7,
+          "title": "Samsung Galaxy Book",
+          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+          "price": 1499,
+          "discountPercentage": 4.15,
+          "rating": 4.25,
+          "stock": 50,
+          "brand": "Samsung",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/7/1.jpg",
+            "https://i.dummyjson.com/data/products/7/2.jpg",
+            "https://i.dummyjson.com/data/products/7/3.jpg",
+            "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "id": 11,
+          "title": "perfume Oil",
+          "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
+          "price": 13,
+          "discountPercentage": 8.4,
+          "rating": 4.26,
+          "stock": 65,
+          "brand": "Impression of Acqua Di Gio",
+          "category": "fragrances",
+          "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/11/1.jpg",
+            "https://i.dummyjson.com/data/products/11/2.jpg",
+            "https://i.dummyjson.com/data/products/11/3.jpg",
+            "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        }
+      ],
+      "totalAmount": 2411,
+      "totalItems": 3,
+      "user": {
+        "email": "user13@gmail.com",
+        "password": "User@133",
+        "addresses": [
+          {
+            "name": "supra",
+            "email": "user13@gmail.com",
+            "phone": "9867675653",
+            "street": "J.K.Road ",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "462023"
+          },
+          {
+            "name": "supra",
+            "email": "user06@gmail.com",
+            "phone": "745353556",
+            "street": "M.G.Road",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "456543"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMenthod": "cash",
+      "selectedAddres": null,
+      "status": "pending",
+      "id": 1
     },
     {
-      "id": 11,
-      "title": "perfume Oil",
-      "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
-      "price": 13,
-      "discountPercentage": 8.4,
-      "rating": 4.26,
-      "stock": 65,
-      "brand": "Impression of Acqua Di Gio",
-      "category": "fragrances",
-      "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/11/1.jpg",
-        "https://i.dummyjson.com/data/products/11/2.jpg",
-        "https://i.dummyjson.com/data/products/11/3.jpg",
-        "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 12
+        }
       ],
-      "quantity": 1,
-      "user": 1
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": {
+        "email": "user13@gmail.com",
+        "password": "User@133",
+        "addresses": [
+          {
+            "name": "supra",
+            "email": "user13@gmail.com",
+            "phone": "9867675653",
+            "street": "J.K.Road ",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "462023"
+          },
+          {
+            "name": "supra",
+            "email": "user06@gmail.com",
+            "phone": "745353556",
+            "street": "M.G.Road",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "456543"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMenthod": "cash",
+      "selectedAddres": null,
+      "status": "pending",
+      "id": 2
+    },
+    {
+      "items": [
+        {
+          "id": 2,
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "id": 7,
+          "title": "Samsung Galaxy Book",
+          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+          "price": 1499,
+          "discountPercentage": 4.15,
+          "rating": 4.25,
+          "stock": 50,
+          "brand": "Samsung",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/7/1.jpg",
+            "https://i.dummyjson.com/data/products/7/2.jpg",
+            "https://i.dummyjson.com/data/products/7/3.jpg",
+            "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "id": 11,
+          "title": "perfume Oil",
+          "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
+          "price": 13,
+          "discountPercentage": 8.4,
+          "rating": 4.26,
+          "stock": 65,
+          "brand": "Impression of Acqua Di Gio",
+          "category": "fragrances",
+          "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/11/1.jpg",
+            "https://i.dummyjson.com/data/products/11/2.jpg",
+            "https://i.dummyjson.com/data/products/11/3.jpg",
+            "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1
+        },
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 12
+        }
+      ],
+      "totalAmount": 3310,
+      "totalItems": 4,
+      "user": {
+        "email": "user13@gmail.com",
+        "password": "User@133",
+        "addresses": [
+          {
+            "name": "supra",
+            "email": "user13@gmail.com",
+            "phone": "9867675653",
+            "street": "J.K.Road ",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "462023"
+          },
+          {
+            "name": "supra",
+            "email": "user06@gmail.com",
+            "phone": "745353556",
+            "street": "M.G.Road",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "456543"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMenthod": "cash",
+      "selectedAddres": null,
+      "status": "pending",
+      "id": 3
     }
   ]
 }

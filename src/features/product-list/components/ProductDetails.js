@@ -3,10 +3,10 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductByIdAsync, selectProductById } from '../productSlice';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { addToCartAsync } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
-const colors= [
+const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
   { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
   { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
@@ -21,7 +21,7 @@ const sizes = [
   { name: '2XL', inStock: true },
   { name: '3XL', inStock: true },
 ]
-const  highlights = [
+const highlights = [
   'Hand cut and sewn locally',
   'Dyed with our proprietary colors',
   'Pre-washed & pre-shrunk',
@@ -41,16 +41,17 @@ export default function ProductDetails() {
 
   const handleCart = (e) => {
     e.preventDefault()
-    console.log({...product})
-    dispatch(addToCartAsync({...product, quantity: 1, user:user.id}))
+    const newItem = { ...product, quantity: 1, user: user.id }
+    delete newItem['id']
+    dispatch(addToCartAsync(newItem))
   }
   useEffect(() => {
-   dispatch(fetchProductByIdAsync(params.id)) 
+    dispatch(fetchProductByIdAsync(params.id))
   }, [dispatch, params.id])
 
   return (
     <div className="bg-white">
-      { product && <div className="pt-6">
+      {product && <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             {product.breadcrumbs && product.breadcrumbs.map((breadcrumb) => (
@@ -245,11 +246,15 @@ export default function ProductDetails() {
               </div>
 
               <button
-              onClick={handleCart}
+                to="/cart"
+                onClick={handleCart}
                 type="submit"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Add to Cart
+                <Link
+                  to="/cart">
+                  Add to Cart
+                </Link>
               </button>
             </form>
           </div>
