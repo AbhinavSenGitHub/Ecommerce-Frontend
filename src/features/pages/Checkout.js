@@ -14,31 +14,6 @@ import { useForm } from 'react-hook-form';
 import { selectLoggedInUser, updateUserAsync } from '../auth/authSlice';
 import { createOrderAsync, selectCurrentOrder } from '../order/orderSlice';
 
-const products = [
-    {
-        id: 1,
-        name: 'Throwback Hip Bag',
-        href: '#',
-        color: 'Salmon',
-        price: '$90.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-        imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-    },
-    {
-        id: 2,
-        name: 'Medium Stuff Satchel',
-        href: '#',
-        color: 'Blue',
-        price: '$32.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-        imageAlt:
-            'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    },
-    // More products...
-]
-
 
 const Checkout = () => {
     const [open, setOpen] = useState(true)
@@ -60,6 +35,7 @@ const Checkout = () => {
         dispatch(deleteItemFromCartAsync(id))
     }
     const handleAddress = (e) => {
+        console.log(e.target.value)
         setSelectedAddres(user.addresses[e.target.value])
     }
     const handlePayment = (e) => {
@@ -224,7 +200,7 @@ const Checkout = () => {
                                                         onChange={handleAddress}
                                                         name="address"
                                                         type="radio"
-                                                        value={selectedAddres}
+                                                        value={index}
                                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                     {/* </div> */}
