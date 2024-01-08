@@ -4,7 +4,9 @@ import UserOrder from '../user/components/UserOrder'
 const UserOrderPage = () => {
   return (
     <div>
-      <Navbar><UserOrder></UserOrder></Navbar>
+      <Navbar>
+      <h1 className="text-2xl my-7 font-bold tracking-tight text-gray-500">My Orders</h1>
+      <UserOrder></UserOrder></Navbar>
     </div>
   )
 }
