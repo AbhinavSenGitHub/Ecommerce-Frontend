@@ -38,7 +38,6 @@ export function fetchProductsByFilters(filter, sort, pagination) {
   // TODO : on server we will support multi values
   let queryString = '';
   for(let key in filter){
-    console.log(filter[key])
     const categoryValue = filter[key]
     if(categoryValue.length){
       const lastCategoryValue = categoryValue[categoryValue.length-1]
@@ -64,4 +63,32 @@ console.log(pagination)
     resolve({data:{products: data, totalItems: totalItems}})
   }
   );
+}
+
+
+// admin APIs
+export function createProduct(product) {
+  return new Promise(async (resolve) => {
+    const responce = await fetch(" http://localhost:8080/products/",{
+      method: 'POST',
+      body: JSON.stringify(product),
+      headers: {'content-type': 'application/json'}
+    })
+    const data = await responce.json()
+    resolve({ data })
+  }
+  )
+}
+// update product
+export function updateProduct(update) {
+  return new Promise(async (resolve) => {
+    const responce = await fetch("http://localhost:8080/products/"+update.id,{
+      method: 'PATCH',
+      body: JSON.stringify(update),
+      headers: {'content-type': 'application/json'}
+    })
+    const data = await responce.json()
+    resolve({ data })
+  }
+  )
 }
