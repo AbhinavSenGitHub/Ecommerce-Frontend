@@ -2509,7 +2509,7 @@
         "id": 1
       },
       "paymentMenthod": "card",
-      "status": "pending",
+      "status": "cancelled",
       "id": 1
     },
     {
@@ -2563,7 +2563,7 @@
         "state": "Madhya pradesh",
         "pinCode": "456543"
       },
-      "status": "pending",
+      "status": "dispatched",
       "id": 2
     },
     {
@@ -2619,6 +2619,180 @@
       },
       "status": "pending",
       "id": 3
+    },
+    {
+      "items": [
+        {
+          "title": "Leather Strap Skeleton Watch",
+          "description": "Leather Strap Skeleton Watch for Men - Stylish and Latest Design",
+          "price": 46,
+          "discountPercentage": 10.2,
+          "rating": 4.98,
+          "stock": 61,
+          "brand": "Strap Skeleton",
+          "category": "mens-watches",
+          "thumbnail": "https://i.dummyjson.com/data/products/64/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/64/1.jpg",
+            "https://i.dummyjson.com/data/products/64/2.webp",
+            "https://i.dummyjson.com/data/products/64/3.jpg",
+            "https://i.dummyjson.com/data/products/64/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        },
+        {
+          "title": "perfume Oil",
+          "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
+          "price": 13,
+          "discountPercentage": 8.4,
+          "rating": 4.26,
+          "stock": 65,
+          "brand": "Impression of Acqua Di Gio",
+          "category": "fragrances",
+          "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/11/1.jpg",
+            "https://i.dummyjson.com/data/products/11/2.jpg",
+            "https://i.dummyjson.com/data/products/11/3.jpg",
+            "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 2
+        },
+        {
+          "title": "OPPOF19",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 280,
+          "discountPercentage": 17.91,
+          "rating": 4.3,
+          "stock": 123,
+          "brand": "OPPO",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/4/1.jpg",
+            "https://i.dummyjson.com/data/products/4/2.jpg",
+            "https://i.dummyjson.com/data/products/4/3.jpg",
+            "https://i.dummyjson.com/data/products/4/4.jpg",
+            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+          ],
+          "image": [
+            "https://i.dummyjson.com/data/products/4/1.jpg",
+            "https://i.dummyjson.com/data/products/4/2.jpg",
+            "https://i.dummyjson.com/data/products/4/3.jpg",
+            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 3
+        }
+      ],
+      "totalAmount": 339,
+      "totalItems": 3,
+      "user": {
+        "email": "user13@gmail.com",
+        "password": "User@133",
+        "role": "user",
+        "addresses": [
+          {
+            "name": "Toyota supra",
+            "email": "user13@gmail.com",
+            "phone": "9867675653",
+            "street": "J.K.Road ",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "456543"
+          },
+          null,
+          null,
+          null,
+          {
+            "name": "Abhinav Sen",
+            "email": "user14@gmail.com",
+            "phone": "9867675653",
+            "street": "M.G.Road",
+            "city": "Delhi",
+            "state": "Uttar Prades",
+            "pinCode": "4535345"
+          },
+          null
+        ],
+        "id": 1
+      },
+      "paymentMenthod": "cash",
+      "selectedAddres": null,
+      "status": "pending",
+      "id": 4
+    },
+    {
+      "items": [
+        {
+          "title": "Microsoft Surface Laptop 4",
+          "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+          "price": 1300,
+          "discountPercentage": 10.23,
+          "rating": 4.43,
+          "stock": 68,
+          "brand": "Microsoft Surface",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/8/1.jpg",
+            "https://i.dummyjson.com/data/products/8/2.jpg",
+            "https://i.dummyjson.com/data/products/8/3.jpg",
+            "https://i.dummyjson.com/data/products/8/4.jpg",
+            "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
+          ],
+          "image": [
+            "https://i.dummyjson.com/data/products/8/1.jpg",
+            "https://i.dummyjson.com/data/products/8/2.jpg",
+            "https://i.dummyjson.com/data/products/8/3.jpg",
+            "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 1167,
+      "totalItems": 1,
+      "user": {
+        "email": "user13@gmail.com",
+        "password": "User@133",
+        "role": "user",
+        "addresses": [
+          {
+            "name": "Toyota supra",
+            "email": "user13@gmail.com",
+            "phone": "9867675653",
+            "street": "J.K.Road ",
+            "city": "Bhopal",
+            "state": "Madhya pradesh",
+            "pinCode": "456543"
+          },
+          null,
+          null,
+          null,
+          {
+            "name": "Abhinav Sen",
+            "email": "user14@gmail.com",
+            "phone": "9867675653",
+            "street": "M.G.Road",
+            "city": "Delhi",
+            "state": "Uttar Prades",
+            "pinCode": "4535345"
+          },
+          null
+        ],
+        "id": 1
+      },
+      "paymentMenthod": "cash",
+      "selectedAddres": null,
+      "status": "pending",
+      "id": 5
     }
   ]
 }

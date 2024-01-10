@@ -14,12 +14,13 @@ import { useForm } from 'react-hook-form';
 import { updateUserAsync } from '../auth/authSlice';
 import { createOrderAsync, selectCurrentOrder } from '../order/orderSlice';
 import { selectUserInfo } from '../user/userSlice';
+import { discountPrice } from '../../app/constant';
 
 
 const Checkout = () => {
     const [open, setOpen] = useState(true)
     const items = useSelector(selectedItem)
-    const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
+    const totalAmount = items.reduce((amount, item) => discountPrice(item) * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const user = useSelector(selectUserInfo)
@@ -194,7 +195,7 @@ const Checkout = () => {
                                         Choose from existing addresses
                                     </p>
                                     <ul role="list" className="divide-y divide-gray-100">
-                                        {user.addresses.map((address, index) => (
+                                        {!user.addresses && user.addresses.map((address, index) => (
                                             <li key={index} className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                                                 <div className="flex min-w-0 gap-x-4">
                                                     <input
@@ -284,7 +285,7 @@ const Checkout = () => {
                                                             <h3>
                                                                 <a href={item.href}>{item.title}</a>
                                                             </h3>
-                                                            <p className="ml-4">{item.price}</p>
+                                                            <p className="ml-4">{discountPrice(item)}</p>
                                                         </div>
                                                         <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
                                                     </div>

@@ -8,11 +8,12 @@ import {
 // import { Dialog, Transition } from '@headlessui/react'
 // import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, Navigate } from 'react-router-dom';
+import { discountPrice } from '../../app/constant';
 
 export default function Cart() {
   const [open, setOpen] = useState(true)
   const items = useSelector(selectedItem)
-  const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
+  const totalAmount = items.reduce((amount, item) => discountPrice(item) * item.quantity + amount, 0)
   const totalItems = items.reduce((total, item) => item.quantity + total, 0)
   const dispatch = useDispatch();
   const handleUpdate = (e, item) => {
@@ -46,7 +47,7 @@ export default function Cart() {
                         <h3>
                           <a href={item.href}>{item.title}</a>
                         </h3>
-                        <p className="ml-4">{item.price}</p>
+                        <p className="ml-4">{discountPrice(item)}</p>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
                     </div>

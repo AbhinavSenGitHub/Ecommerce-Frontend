@@ -49,10 +49,8 @@ export function fetchProductsByFilters(filter, sort, pagination) {
     queryString += `${key}=${sort[key]}&`
   }
 // pagination
-console.log(pagination)
   for(let key in pagination){
     queryString += `${key}=${pagination[key]}&`
-    console.log(`${key}=${pagination[key]}&`)
   }
 
   return new Promise(async (resolve) =>{
