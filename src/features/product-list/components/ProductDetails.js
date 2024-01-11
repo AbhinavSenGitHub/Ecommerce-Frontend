@@ -7,6 +7,8 @@ import { Link, useParams } from 'react-router-dom';
 import { addToCartAsync } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { discountPrice } from '../../../app/constant';
+// import { useAlert } from "react-alert";
+
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
   { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
@@ -37,6 +39,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(sizes[2])
   const product = useSelector(selectProductById)
   const user = useSelector(selectLoggedInUser)
+  // const alert = useAlert();
   const dispatch = useDispatch();
   const params = useParams()
 
@@ -258,6 +261,7 @@ export default function ProductDetails() {
                   Add to Cart
                 </Link>
               </button>
+              
             </form>
           </div>
 
