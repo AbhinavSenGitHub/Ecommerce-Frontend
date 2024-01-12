@@ -195,7 +195,7 @@ const Checkout = () => {
                                         Choose from existing addresses
                                     </p>
                                     <ul role="list" className="divide-y divide-gray-100">
-                                        {!user.addresses && user.addresses.map((address, index) => (
+                                        {user.addresses && user.addresses.map((address, index) => (
                                             <li key={index} className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                                                 <div className="flex min-w-0 gap-x-4">
                                                     <input

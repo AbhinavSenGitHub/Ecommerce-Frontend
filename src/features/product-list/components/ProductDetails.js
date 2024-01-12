@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProductByIdAsync, selectProductById } from '../productSlice';
+import { fetchProductByIdAsync, selectProductById, selectProductStatus } from '../productSlice';
 import { Link, useParams } from 'react-router-dom';
-import { addToCartAsync } from '../../cart/cartSlice';
+import { addToCartAsync, selectedItem } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { discountPrice } from '../../../app/constant';
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
+import { Grid } from 'react-loader-spinner';
 
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -39,15 +40,29 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(sizes[2])
   const product = useSelector(selectProductById)
   const user = useSelector(selectLoggedInUser)
-  // const alert = useAlert();
+  const alert = useAlert();
   const dispatch = useDispatch();
   const params = useParams()
-
+  const items = useSelector(selectedItem)
+  const status = useSelector(selectProductStatus)
   const handleCart = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const newItem = { ...product, quantity: 1, user: user.id }
     delete newItem['id']
-    dispatch(addToCartAsync(newItem))
+    // dispatch(addToCartAsync(newItem));
+    if (items.findIndex((item) => item.productId === product.id) < 0) {   //
+      const newItem = {
+        ...product,
+        productId: product.id,
+        quantity: 1,
+        user: user.id,
+      };
+      delete newItem['id'];
+      dispatch(addToCartAsync(newItem));
+      alert.success("Item Added to your cart successfully")
+    } else {
+      alert.success("Item already added")
+    }
   }
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id))
@@ -55,6 +70,16 @@ export default function ProductDetails() {
 
   return (
     <div className="bg-white">
+      {status === 'loading' ? <Grid
+        visible={true}
+        height="80"
+        width="80"
+        color="rgba(79,70,229)"
+        ariaLabel="grid-loading"
+        radius="12.5"
+        wrapperStyle={{}}
+        wrapperClass="grid-wrapper"
+      /> : null}
       {product && <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -251,17 +276,14 @@ export default function ProductDetails() {
               </div>
 
               <button
-                to="/cart"
                 onClick={handleCart}
                 type="submit"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                <Link
-                  to="/cart">
-                  Add to Cart
-                </Link>
+
+                Add to Cart
+
               </button>
-              
             </form>
           </div>
 

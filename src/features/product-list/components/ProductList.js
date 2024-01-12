@@ -8,8 +8,10 @@ import {
   selectAllProducts,
   selectBrands,
   selectCategories,
+  selectProductStatus,
   selectTotalItems,
 } from '../productSlice';
+import { Grid } from 'react-loader-spinner'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon, StarIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ChevronLeftIcon, ChevronRightIcon, LinkIcon } from '@heroicons/react/20/solid'
@@ -22,18 +24,12 @@ const sortOptions = [
   { name: 'Price: High to Low', sort: 'price', order: "desc", current: false },
 ]
 
-const items = [
-  { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-  { id: 2, title: 'Front End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-  { id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote' },
-]
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function ProductList() {
-  
+
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [filter, setFilter] = useState({})
@@ -43,19 +39,20 @@ export default function ProductList() {
   const categories = useSelector(selectCategories)
   const brands = useSelector(selectBrands)
   const totalItems = useSelector(selectTotalItems)
-console.log(brands)
+  const status = useSelector(selectProductStatus)
+  console.log(brands)
   const filters = [
     {
       id: 'category',
       name: 'Category',
-      options:categories,
+      options: categories,
     },
     {
       id: 'brand',
       name: 'Brands',
       options: brands,
     },
-  
+
   ]
   const handleFilter = (e, section, option) => {
     const newFilter = { ...filter }
@@ -80,7 +77,7 @@ console.log(brands)
   }
   // pagination
   const handlePage = (page) => {
-    console.log({page})
+    console.log({ page })
     setPage(page)
   }
   useEffect(() => {
@@ -177,7 +174,7 @@ console.log(brands)
                   <DesktopFilter handleFilter={handleFilter} filters={filters}></DesktopFilter>
 
                   {/* Product grid */}
-                  <ProductGrid products={products}></ProductGrid>
+                  <ProductGrid products={products} status={status}></ProductGrid>
                 </div>
               </section>
               <Pagination page={page} setPage={setPage} handlePage={handlePage} totalItems={totalItems}></Pagination>
@@ -338,13 +335,23 @@ function DesktopFilter({ handleFilter, filters }) {
     </form>
   )
 }
-function ProductGrid({ products }) {
+function ProductGrid({ products, status }) {
   return (
     <div className="lg:col-span-3">
       {/* This is a porduct list */}
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+            {status === 'loading' ? <Grid
+              visible={true}
+              height="80"
+              width="80"
+              color="rgba(79,70,229)"
+              ariaLabel="grid-loading"
+              radius="12.5"
+              wrapperStyle={{}}
+              wrapperClass="grid-wrapper"
+            /> : null}
             {products.map((product) => (
               <Link to={`product-details/${product.id}`}>
                 <div key={product.id} className="group relative px-2 py-2 border-solid border-2 border-gray-200">
@@ -377,6 +384,7 @@ function ProductGrid({ products }) {
                       <p className="text-sm font-medium line-through text-gray-400">$ {product.price}</p>
                     </div>
                   </div>
+
                 </div>
               </Link>
             ))}

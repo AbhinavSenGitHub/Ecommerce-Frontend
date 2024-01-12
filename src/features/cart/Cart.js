@@ -1,21 +1,24 @@
 import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  deleteItemFromCartAsync,
-  increment, selectedItem, updateCartAsync,
+  deleteItemFromCartAsync, selectCartStatus, selectedItem, updateCartAsync,
 } from './cartSlice';
 // import itemList from '../item-list/components/itemList'
 // import { Dialog, Transition } from '@headlessui/react'
 // import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, Navigate } from 'react-router-dom';
 import { discountPrice } from '../../app/constant';
+import { Grid } from 'react-loader-spinner';
+import Modal from '../common/Modal';
 
 export default function Cart() {
   const [open, setOpen] = useState(true)
   const items = useSelector(selectedItem)
   const totalAmount = items.reduce((amount, item) => discountPrice(item) * item.quantity + amount, 0)
   const totalItems = items.reduce((total, item) => item.quantity + total, 0)
+  const status = useSelector(selectCartStatus)
   const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(-1)
   const handleUpdate = (e, item) => {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }))
   }
@@ -24,12 +27,23 @@ export default function Cart() {
   }
   return (
     <>
-    {!items.length && <Navigate to='/'></Navigate>}
+      {!items.length && <Navigate to='/'></Navigate>}
+
       <div className="mx-auto bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <h1 className="text-4xl my-7 font-bold tracking-tight text-gray-900">Cart</h1>
 
           <div className="flow-root">
+            {status === 'loading' ? <Grid
+              visible={true}
+              height="80"
+              width="80"
+              color="rgba(79,70,229)"
+              ariaLabel="grid-loading"
+              radius="12.5"
+              wrapperStyle={{}}
+              wrapperClass="grid-wrapper"
+            /> : null}
             <ul role="list" className="-my-6 divide-y divide-gray-200">
               {items.map((item) => (
                 <li key={item.id} className="flex py-6">
@@ -64,8 +78,18 @@ export default function Cart() {
                       </div>
 
                       <div className="flex">
+                        <Modal
+                          title={`Delete ${item.title} from the cart`}
+                          message="Are you sure you want to delete this item from your cart"
+                          deactivate="Delete"
+                          cancleOption="Cancle"
+                          deactivateAction = {()=> handleRemove(item.id)}
+                          cancleAction = {() => setOpenModal(-1)}
+                          showModal = {openModal === item.id}
+                        >
+                        </Modal>
                         <button
-                          onClick={(e) => handleRemove(e, item.id)}
+                          onClick={() => setOpenModal(item.id)}
                           type="button"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
