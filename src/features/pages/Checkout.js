@@ -20,8 +20,8 @@ import { discountPrice } from '../../app/constant';
 const Checkout = () => {
     const [open, setOpen] = useState(true)
     const items = useSelector(selectedItem)
-    const totalAmount = items.reduce((amount, item) => discountPrice(item) * item.quantity + amount, 0)
-    const totalItems = items.reduce((total, item) => item.quantity + total, 0)
+    const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quentity + amount, 0)
+    const totalItems = items.reduce((total, item) => item.quentity + total, 0)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const user = useSelector(selectUserInfo)
     const [selectedAddres, setSelectedAddres] = useState(null)
@@ -31,7 +31,7 @@ const Checkout = () => {
     const dispatch = useDispatch();
 
     const handleUpdate = (e, item) => {
-        dispatch(updateCartAsync({ ...item, quantity: +e.target.value }))
+        dispatch(updateCartAsync({ id:item.id, quantity: +e.target.value }))
     }
     const handleRemove = (e, id) => {
         dispatch(deleteItemFromCartAsync(id))
@@ -48,7 +48,7 @@ const Checkout = () => {
             items, 
             totalAmount, 
             totalItems, 
-            user, 
+            user: user.id, 
             paymentMenthod, 
             selectedAddres,
             status: 'pending'
@@ -273,8 +273,8 @@ const Checkout = () => {
                                             <li key={item.id} className="flex py-6">
                                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                     <img
-                                                        src={item.thumbnail}
-                                                        alt={item.title}
+                                                        src={item.product.thumbnail}
+                                                        alt={item.product.title}
                                                         className="h-full w-full object-cover object-center"
                                                     />
                                                 </div>
@@ -283,11 +283,11 @@ const Checkout = () => {
                                                     <div>
                                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                                             <h3>
-                                                                <a href={item.href}>{item.title}</a>
+                                                                <a href={item.product.href}>{item.product.title}</a>
                                                             </h3>
-                                                            <p className="ml-4">{discountPrice(item)}</p>
+                                                            <p className="ml-4">{discountPrice(item.product)}</p>
                                                         </div>
-                                                        <p className="mt-1 text-sm text-gray-500">{item.brand}</p>
+                                                        <p className="mt-1 text-sm text-gray-500">{item.product.brand}</p>
                                                     </div>
                                                     <div className="flex flex-1 items-end justify-between text-sm">
                                                         <div className="text-gray-500">

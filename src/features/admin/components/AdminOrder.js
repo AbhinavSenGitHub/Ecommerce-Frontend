@@ -59,7 +59,7 @@ const AdminOrder = () => {
 
 
     return (
-        <>
+        
             <div className="overflow-x-auto">
                 <div className=" flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
                     <div className="w-full">
@@ -175,9 +175,8 @@ const AdminOrder = () => {
                     </div>
                 </div>
                 <Pagination page={page} setPage={setPage} handlePage={handlePage} totalItems={totalOrders}></Pagination>
-
-            </div >
-        </>
+            </div>
+        
 
 
     )

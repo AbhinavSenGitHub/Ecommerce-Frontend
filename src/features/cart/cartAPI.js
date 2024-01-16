@@ -7,6 +7,7 @@ export function addtoCart(item) {
     })
     const data = await responce.json()
     resolve({ data })
+    console.log(data)
   }
   )
 }
@@ -14,7 +15,7 @@ export function addtoCart(item) {
 // fetch cart data
 export function fecthItemsByUserId(userId) {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" http://localhost:8080/cart?user="+userId)
+    const responce = await fetch(" http://localhost:8080/cart?user=" + userId)
     const data = await responce.json()
     resolve({ data })
   }

@@ -40,7 +40,6 @@ export default function ProductList() {
   const brands = useSelector(selectBrands)
   const totalItems = useSelector(selectTotalItems)
   const status = useSelector(selectProductStatus)
-  console.log(brands)
   const filters = [
     {
       id: 'category',
@@ -64,10 +63,8 @@ export default function ProductList() {
       }
     } else {
       const index = newFilter[section.id].findIndex(el => el === option.value)
-      console.log(index)
       newFilter[section.id].splice(index, 1)
     }
-    console.log(newFilter)
     setFilter(newFilter)
   }
   // sort
@@ -378,6 +375,9 @@ function ProductGrid({ products, status }) {
                         <StarIcon className="w-6 h-5 inline -ml-1"></StarIcon>
                         <span className="align-bottom">{product.rating}</span>
                       </p>
+                      {product.stock===0 && <p className="mt-1 text-sm text-gray-500">
+                        <span className="text-red-500">Out Of Stock</span>
+                      </p>}
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">$ {discountPrice(product)}</p>

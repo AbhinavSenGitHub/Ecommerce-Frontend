@@ -47,6 +47,7 @@ export function fetchProductsByFilters(filter, sort, pagination) {
 // sort
   for(let key in sort){
     queryString += `${key}=${sort[key]}&`
+    console.log(key, " ", sort[key], " ", queryString)
   }
 // pagination
   for(let key in pagination){
@@ -62,7 +63,7 @@ export function fetchProductsByFilters(filter, sort, pagination) {
   }
   );
 }
-
+ 
 
 // admin APIs
 export function createProduct(product) {

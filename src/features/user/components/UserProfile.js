@@ -201,7 +201,7 @@ export default function Counter() {
 
 
               <div><p className="mt-0.5 text-sm text-gray-500">Your Address : </p>
-                {user.addresses.map((address, index) =>
+                {user.addresses && user.addresses.map((address, index) =>
                   <div>
                     {selectedEditIndex === index ? <form className="bg-white px-5 py-12" noValidate onSubmit={handleSubmit((data) => {
                       handleEdit(data, index)
