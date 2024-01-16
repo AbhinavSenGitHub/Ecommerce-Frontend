@@ -17,7 +17,7 @@ export default function Order() {
   return (
     <div>
       <div>
-      {order.id}
+      {Order}
       </div>
     </div>
   );

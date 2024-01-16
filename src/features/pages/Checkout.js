@@ -20,12 +20,12 @@ import { discountPrice } from '../../app/constant';
 const Checkout = () => {
     const [open, setOpen] = useState(true)
     const items = useSelector(selectedItem)
-    const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quentity + amount, 0)
-    const totalItems = items.reduce((total, item) => item.quentity + total, 0)
+    const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quantity + amount, 0)
+    const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const user = useSelector(selectUserInfo)
     const [selectedAddres, setSelectedAddres] = useState(null)
-    const [paymentMenthod, setPaymentMenthod] = useState("cash")
+    const [paymentMenthod, setPaymentMenthod] = useState()
     const currentOrder = useSelector(selectCurrentOrder)
 
     const dispatch = useDispatch();
@@ -44,16 +44,21 @@ const Checkout = () => {
         setPaymentMenthod(e.target.value)
     }
     const handleOrder = (e) =>{
-        const order = {
-            items, 
-            totalAmount, 
-            totalItems, 
-            user: user.id, 
-            paymentMenthod, 
-            selectedAddres,
-            status: 'pending'
+        if(selectedAddres && paymentMenthod){
+            const order = {
+                items, 
+                totalAmount, 
+                totalItems, 
+                user: user.id, 
+                paymentMenthod, 
+                selectedAddres,
+                status: 'pending'
+            }
+            dispatch(createOrderAsync(order))
+        }else {
+            alert('Enter Address and Payment method');
         }
-        dispatch(createOrderAsync(order))
+        
     }
     return (
         <>
@@ -245,6 +250,7 @@ const Checkout = () => {
                                                         name="payments"
                                                         value="card"
                                                         type="radio"
+                                                        checked={paymentMenthod === "card" }
                                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                     <label htmlFor="card" className="block text-sm font-medium leading-6 text-gray-900">
@@ -294,7 +300,7 @@ const Checkout = () => {
                                                             <label htmlFor="quantity" className="inline mr-5 text-sm font-medium leading-6 text-gray-900">
                                                                 Qty
                                                             </label>
-                                                            <select className="text-sm font-medium" onChange={(e) => handleUpdate(e, item)}>
+                                                            <select className="text-sm font-medium" onChange={(e) => handleUpdate(e, item)} value={item.quantity}>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>

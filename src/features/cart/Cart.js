@@ -14,8 +14,8 @@ import Modal from '../common/Modal';
 export default function Cart() {
   const [open, setOpen] = useState(true)
   const items = useSelector(selectedItem)
-  const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quentity + amount, 0)
-  const totalItems = items.reduce((total, item) => item.quentity + total, 0)
+  const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quantity + amount, 0)
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0)
   const status = useSelector(selectCartStatus)
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(-1)
@@ -70,7 +70,7 @@ export default function Cart() {
                         <label htmlFor="quantity" className="inline mr-5 text-sm font-medium leading-6 text-gray-900">
                           Qty
                         </label>
-                        <select className="text-sm font-medium" onChange={(e) => handleUpdate(e, item)}>
+                        <select className="text-sm font-medium" onChange={(e) => handleUpdate(e, item)} value={item.quantity}>
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -83,7 +83,7 @@ export default function Cart() {
                           message="Are you sure you want to delete this item from your cart"
                           deactivate="Delete"
                           cancleOption="Cancle"
-                          deactivateAction = {()=> handleRemove(item.id)}
+                          deactivateAction = {(e)=> handleRemove(e, item.id)}
                           cancleAction = {() => setOpenModal(-1)}
                           showModal = {openModal === item.id}
                         >

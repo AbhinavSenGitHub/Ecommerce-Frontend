@@ -49,7 +49,7 @@ export default function UserOrder() {
                         <div className="flex flex-1 items-end justify-between text-sm">
                           <div className="text-gray-500">
                             <label htmlFor="quantity" className="inline mr-5 text-sm font-medium leading-6 text-gray-900">
-                              Qty : {item.quentity}
+                              Qty : {item.quantity}
                             </label>
                           </div>
                         </div>
@@ -69,21 +69,26 @@ export default function UserOrder() {
                 <p>{order.totalItems} items</p>
               </div>
               {/* {order.items.map((item) =>(  ))} */}
-              { order.selectedAddres && <div><p className="mt-0.5 text-sm text-gray-500">Shipping Address : </p>
+              { order.selectedAddres && 
+                order.selectedAddres.map((item)=> (<div><p className="mt-0.5 text-sm text-gray-500">Shipping Address : </p>
 
                <div className="flex justify-between my-4 gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">{order.selectedAddres.name}</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{order.selectedAddres.street}</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{order.selectedAddres.pinCode}</p>
+                  
+                    <p className="text-sm font-semibold leading-6 text-gray-900">{item.name}</p>
+                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{item.street}</p>
+                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{item.pinCode}</p>
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">Phone: {order.selectedAddres.phone}</p>
-                  <p className="text-sm leading-6 text-gray-500">{order.selectedAddres.city}</p>
+                  <p className="text-sm leading-6 text-gray-900">Phone: {item.phone}</p>
+                  <p className="text-sm leading-6 text-gray-500">{item.city}</p>
                 </div>
-              </div></div>}
+              </div>
+              </div>
+              ))}
+              
 
             </div>
           </div>
