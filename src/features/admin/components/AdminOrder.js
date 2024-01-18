@@ -123,10 +123,11 @@ const AdminOrder = () => {
                                                 <div className="mr-2">
                                                     <img
                                                         className="w-6 h-6 rounded-full"
-                                                        src={item.thumbnail}
+                                                        src={item.product.thumbnail}
+                                                        alt={item.product.title}
                                                     />
                                                 </div>
-                                                <span>{item.title} - #{item.quantity} - ${discountPrice(item)}</span>
+                                                <span>{item.product.title} - #{item.quantity} - ${discountPrice(item.product)}</span>
                                             </div>)}
                                         </td>
                                         <td className="py-3 px-6 text-center">
@@ -135,15 +136,15 @@ const AdminOrder = () => {
                                             </div>
                                         </td>
                                         <td className="py-3 px-6 text-center">
-                                            {order.selectedAddres && <div className="">
+                                            {order.selectedAddress && <div className="">
                                                 <div>
-                                                    <strong>{order.selectedAddres.name}</strong>,
+                                                    <strong>{order.selectedAddress.name}</strong>,
                                                 </div>
-                                                <div>{order.selectedAddres.street},</div>
-                                                <div>{order.selectedAddres.city}, </div>
-                                                <div>{order.selectedAddres.state}, </div>
-                                                <div>{order.selectedAddres.pinCode}, </div>
-                                                <div>{order.selectedAddres.phone}, </div>
+                                                <div>{order.selectedAddress.street},</div>
+                                                <div>{order.selectedAddress.city}, </div>
+                                                <div>{order.selectedAddress.state}, </div>
+                                                <div>{order.selectedAddress.pinCode}, </div>
+                                                <div>{order.selectedAddress.phone}, </div>
                                             </div>}
                                         </td>
                                         <td className="py-3 px-6 text-center">

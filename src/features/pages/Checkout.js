@@ -11,7 +11,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, Navigate } from 'react-router-dom';
 import { deleteItemFromCartAsync, selectedItem, updateCartAsync } from '../cart/cartSlice';
 import { useForm } from 'react-hook-form';
-import { updateUserAsync } from '../auth/authSlice';
+import { updateUserAsync } from '../user/userSlice';
 import { createOrderAsync, selectCurrentOrder } from '../order/orderSlice';
 import { selectUserInfo } from '../user/userSlice';
 import { discountPrice } from '../../app/constant';
@@ -24,7 +24,7 @@ const Checkout = () => {
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const user = useSelector(selectUserInfo)
-    const [selectedAddres, setSelectedAddres] = useState(null)
+    const [selectedAddress, setselectedAddress] = useState(null)
     const [paymentMenthod, setPaymentMenthod] = useState()
     const currentOrder = useSelector(selectCurrentOrder)
 
@@ -38,20 +38,20 @@ const Checkout = () => {
     }
     const handleAddress = (e) => {
         console.log(e.target.value)
-        setSelectedAddres(user.addresses[e.target.value])
+        setselectedAddress(user.addresses[e.target.value])
     }
     const handlePayment = (e) => {
         setPaymentMenthod(e.target.value)
     }
     const handleOrder = (e) =>{
-        if(selectedAddres && paymentMenthod){
+        if(selectedAddress && paymentMenthod){
             const order = {
                 items, 
                 totalAmount, 
                 totalItems, 
                 user: user.id, 
                 paymentMenthod, 
-                selectedAddres,
+                selectedAddress,
                 status: 'pending'
             }
             dispatch(createOrderAsync(order))

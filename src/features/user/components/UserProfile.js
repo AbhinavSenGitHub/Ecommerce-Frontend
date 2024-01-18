@@ -4,27 +4,27 @@ import { selectUserInfo, updateUserAsync } from '../userSlice'
 import { useForm } from 'react-hook-form';
 
 export default function Counter() {
-  const user = useSelector(selectUserInfo)
+  const userInfo = useSelector(selectUserInfo)
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1)
   const [showAddAddressFrom, setShowAddAddressFrom] = useState(false)
   const dispatch = useDispatch();
   const { register, handleSubmit, watch, setValue, formState: { errors }, reset } = useForm();
 
   const handleEdit = (addressUpdate, index) => {
-    const newUser = { ...user, addresses: [...user.addresses] }
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses] }
     newUser.addresses.splice(index, 1, addressUpdate)
     dispatch(updateUserAsync(newUser))
     setSelectedEditIndex(-1)
   }
   const handleRemove = (e, index) => {
-    const newUser = { ...user, addresses: [...user.addresses] }
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses] }
     newUser.addresses.splice(index, 1)
     dispatch(updateUserAsync(newUser))
   }
 
   const handleEditForm = (index) => {
     setSelectedEditIndex(index)
-    const address = user.addresses[index]
+    const address = userInfo.addresses[index]
     setValue('name', address.name)
     setValue('email', address.email)
     setValue('phone', address.phone)
@@ -35,7 +35,7 @@ export default function Counter() {
   }
 
   const handleAddAddress = (addressData) => {
-    const newUser = { ...user, addresses: [...user.addresses,, addressData] }
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses,, addressData] }
     dispatch(updateUserAsync(newUser))
     setShowAddAddressFrom(false)
   }
@@ -46,13 +46,13 @@ export default function Counter() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
               <h1 className="text-4xl my-7 font-bold tracking-tight text-gray-900">
-                Name: {user.name ? user.name : "New Gust User"}
+                Name: {userInfo.name ? userInfo.name : "New Gust User"}
               </h1>
               <h3 className="text-xl my-7 font-bold tracking-tight text-red-900">
-                email address: {user.email}
+                email address: {userInfo.email}
               </h3>
-              {user.role === "admin" && <h3 className="text-xl my-7 font-bold tracking-tight text-red-900">
-                role: {user.role}
+              {userInfo.role === "admin" && <h3 className="text-xl my-7 font-bold tracking-tight text-red-900">
+                role: {userInfo.role}
               </h3>}
             </div>
             <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
@@ -201,7 +201,7 @@ export default function Counter() {
 
 
               <div><p className="mt-0.5 text-sm text-gray-500">Your Address : </p>
-                {user.addresses && user.addresses.map((address, index) =>
+                {userInfo.addresses && userInfo.addresses.map((address, index) =>
                   <div>
                     {selectedEditIndex === index ? <form className="bg-white px-5 py-12" noValidate onSubmit={handleSubmit((data) => {
                       handleEdit(data, index)

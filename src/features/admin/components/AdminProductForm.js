@@ -5,12 +5,14 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Modal from '../../common/Modal'
+import { useAlert } from "react-alert";
 const AdminProductForm = () => {
     const { register, handleSubmit, watch, reset, setValue, formState: { errors } } = useForm();
     const categories = useSelector(selectCategories)
     const brands = useSelector(selectBrands)
     const selectedProduct = useSelector(selectProductById)
     const param = useParams()
+    const alert = useAlert();
     const dispatch = useDispatch()
     const [openModal, setOpenModal] = useState(-1)
     useEffect(() => {
@@ -48,7 +50,7 @@ const AdminProductForm = () => {
     }
     return (
         <div>
-            {selectedProduct && <form
+            <form
                 noValidate
                 onSubmit={handleSubmit((data) => {
                     console.log(data)
@@ -65,10 +67,12 @@ const AdminProductForm = () => {
                         product.id = param.id
                         product.rating = selectedProduct.rating || 0;
                         dispatch(updateProductAsync(product))
+                        alert.success("Product Updated Successfully")
                         reset()
                     }
                     else {
                         dispatch(createProductsAsync(product))
+                        alert.success("Product Added Successfully")
                         reset()
                     }
                 })}>
@@ -76,7 +80,7 @@ const AdminProductForm = () => {
                     <div className="border-b border-gray-900/10 pb-12">
                         <h2 className="text-base font-semibold leading-7 text-gray-900">Add Product</h2>
                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            {selectedProduct.deleted ? (<h2 className="text-red-500 sm:col-span-6"> This product is Deleted</h2>) : null}
+                            {selectedProduct && selectedProduct.deleted && <h2 className="text-red-500 sm:col-span-6"> This product is Deleted</h2>}
                             <div className="sm:col-span-6">
                                 <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">
                                     Product Name
@@ -378,7 +382,7 @@ const AdminProductForm = () => {
                         Save
                     </button>
                 </div>
-            </form>}
+            </form>
 
             {selectedProduct && <Modal
                 title={`Delete ${selectedProduct.title} from the cart`}

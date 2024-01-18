@@ -33,7 +33,7 @@ export function fetchProductById(id) {
   }
   )
 }
-export function fetchProductsByFilters(filter, sort, pagination) {
+export function fetchProductsByFilters(filter, sort, pagination, admin) {
   // filter = {"category":"smartphone"}
   // TODO : on server we will support multi values
   let queryString = '';
@@ -52,6 +52,9 @@ export function fetchProductsByFilters(filter, sort, pagination) {
 // pagination
   for(let key in pagination){
     queryString += `${key}=${pagination[key]}&`
+  }
+  if(admin){
+    queryString += "admin=ture"
   }
 
   return new Promise(async (resolve) =>{

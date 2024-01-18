@@ -5,12 +5,12 @@ import { discountPrice } from '../../../app/constant';
 
 
 export default function UserOrder() {
-  const user = useSelector(selectUserInfo)
+  const userInfo = useSelector(selectUserInfo)
   const dispatch = useDispatch()
   const orders = useSelector(selectUserOrder)
   useEffect(() => {
-    dispatch(fetchLoggedInUserOrderAsync(user.id))
-  }, [])
+    dispatch(fetchLoggedInUserOrderAsync(userInfo.id))
+  }, [dispatch, userInfo])
   return (
     <>
     {orders && orders.map(order => (<div className='bg-white'>
@@ -69,25 +69,24 @@ export default function UserOrder() {
                 <p>{order.totalItems} items</p>
               </div>
               {/* {order.items.map((item) =>(  ))} */}
-              { order.selectedAddres && 
-                order.selectedAddres.map((item)=> (<div><p className="mt-0.5 text-sm text-gray-500">Shipping Address : </p>
+              { order.selectedAddress&& <div><p className="mt-0.5 text-sm text-gray-500">Shipping Address : </p>
 
                <div className="flex justify-between my-4 gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">
                   
-                    <p className="text-sm font-semibold leading-6 text-gray-900">{item.name}</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{item.street}</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{item.pinCode}</p>
+                    <p className="text-sm font-semibold leading-6 text-gray-900">{order.selectedAddress.name}</p>
+                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{order.selectedAddress.street}</p>
+                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{order.selectedAddress.pinCode}</p>
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">Phone: {item.phone}</p>
-                  <p className="text-sm leading-6 text-gray-500">{item.city}</p>
+                  <p className="text-sm leading-6 text-gray-900">Phone: {order.selectedAddress.phone}</p>
+                  <p className="text-sm leading-6 text-gray-500">{order.selectedAddress.city}</p>
                 </div>
               </div>
               </div>
-              ))}
+              }
               
 
             </div>
