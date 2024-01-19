@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchLoggedInUserOrderAsync, selectUserInfo, selectUserOrder } from '../userSlice';
+import { fetchLoggedInUserOrderAsync, selectUserInfo, selectUserInfoStatus, selectUserOrder } from '../userSlice';
 import { discountPrice } from '../../../app/constant';
+import { Grid } from 'react-loader-spinner';
 
 
 export default function UserOrder() {
-  const userInfo = useSelector(selectUserInfo)
   const dispatch = useDispatch()
   const orders = useSelector(selectUserOrder)
+  const status = useSelector(selectUserInfoStatus)
+  console.log("orders:- " , orders)
   useEffect(() => {
-    dispatch(fetchLoggedInUserOrderAsync(userInfo.id))
-  }, [dispatch, userInfo])
+    dispatch(fetchLoggedInUserOrderAsync())
+  }, [dispatch])
   return (
-    <>
+    <div>
     {orders && orders.map(order => (<div className='bg-white'>
       
         <div>
@@ -96,6 +98,16 @@ export default function UserOrder() {
       
     </div>
     ))}
-    </>
+    {status === 'loading' ? <Grid
+        visible={true}
+        height="80"
+        width="80"
+        color="rgba(79,70,229)"
+        ariaLabel="grid-loading"
+        radius="12.5"
+        wrapperStyle={{}}
+        wrapperClass="grid-wrapper"
+      /> : null}
+    </div>
   )
 }

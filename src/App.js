@@ -112,8 +112,8 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
   if(user){    
-      dispatch(fecthItemsByUserIdAsync(user.id))   
-      dispatch(fetchLoggedInUserAsync(user.id))
+      dispatch(fecthItemsByUserIdAsync())   
+      dispatch(fetchLoggedInUserAsync())
   }
 }, [dispatch, user])
   return (

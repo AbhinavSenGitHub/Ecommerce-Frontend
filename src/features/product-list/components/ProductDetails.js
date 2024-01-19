@@ -39,21 +39,17 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(colors[0])
   const [selectedSize, setSelectedSize] = useState(sizes[2])
   const product = useSelector(selectProductById)
-  const user = useSelector(selectLoggedInUser)
   const alert = useAlert();
   const dispatch = useDispatch();
   const params = useParams()
   const items = useSelector(selectedItem)
   const status = useSelector(selectProductStatus)
   const handleCart = (e) => {
-    e.preventDefault();
-    const newItem = { ...product, quantity: 1, user: user.id }
-    delete newItem['id']
+    e.preventDefault()
     if (items.findIndex((item) => item.product.id === product.id) < 0) {   //
       const newItem = {
         product: product.id,
-        quantity: 1,
-        user: user.id,
+        quantity: 1
       } 
       dispatch(addToCartAsync(newItem));
       alert.success("Item Added to your cart successfully")
