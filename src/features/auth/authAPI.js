@@ -34,6 +34,24 @@ export function checkUser(loginInfo) {
   )
 }
 
+export function checkAuth() {
+  return new Promise(async (resolve, reject) => {
+    try{
+      const responce = await fetch("http://localhost:8080/auth/check")
+      if(responce.ok){
+        const data = await responce.json()
+        resolve({ data })
+      }else{
+        const err = await responce.text()
+        reject(err)
+      }
+    } catch (err){
+      reject({err})
+    }
+  }
+  )
+}
+
 export function signOut(userId) {
   return new Promise(async (resolve) => {
     resolve({ data: 'success' })

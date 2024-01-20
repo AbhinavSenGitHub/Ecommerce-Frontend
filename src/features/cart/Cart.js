@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  deleteItemFromCartAsync, selectCartStatus, selectedItem, updateCartAsync,
+  deleteItemFromCartAsync, selectCartLoaded, selectCartStatus, selectedItem, updateCartAsync,
 } from './cartSlice';
 // import itemList from '../item-list/components/itemList'
 // import { Dialog, Transition } from '@headlessui/react'
@@ -17,6 +17,7 @@ export default function Cart() {
   const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quantity + amount, 0)
   const totalItems = items.reduce((total, item) => item.quantity + total, 0)
   const status = useSelector(selectCartStatus)
+  const cartLoaded = useSelector(selectCartLoaded)
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(-1)
   const handleUpdate = (e, item) => {
@@ -27,7 +28,7 @@ export default function Cart() {
   }
   return (
     <>
-      {!items.length && <Navigate to='/'></Navigate>}
+      {!items.length && cartLoaded && <Navigate to='/'></Navigate>}
 
       <div className="mx-auto bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">

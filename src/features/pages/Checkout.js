@@ -11,7 +11,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, Navigate } from 'react-router-dom';
 import { deleteItemFromCartAsync, selectedItem, updateCartAsync } from '../cart/cartSlice';
 import { useForm } from 'react-hook-form';
-import { updateUserAsync } from '../user/userSlice';
+import { selectcheckoutLoaded, updateUserAsync } from '../user/userSlice';
 import { createOrderAsync, selectCurrentOrder } from '../order/orderSlice';
 import { selectUserInfo } from '../user/userSlice';
 import { discountPrice } from '../../app/constant';
@@ -27,7 +27,7 @@ const Checkout = () => {
     const [selectedAddress, setselectedAddress] = useState(null)
     const [paymentMenthod, setPaymentMenthod] = useState()
     const currentOrder = useSelector(selectCurrentOrder)
-
+    const checkoutLoaded = useSelector(selectcheckoutLoaded)
     const dispatch = useDispatch();
 
     const handleUpdate = (e, item) => {
@@ -62,7 +62,7 @@ const Checkout = () => {
     }
     return (
         <>
-            {!items.length && <Navigate to='/' replace={true}></Navigate>}
+            {!items.length && checkoutLoaded && <Navigate to='/' replace={true}></Navigate>}
             {currentOrder && <Navigate to= {`/order-success/${currentOrder.id}`} replace={true}></Navigate>}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
@@ -70,7 +70,6 @@ const Checkout = () => {
                         <form className="bg-white px-5 py-12" noValidate onSubmit={handleSubmit((data) => {
                             dispatch(updateUserAsync({ ...user, addresses: [...user.addresses, data] }))
                             reset()
-                            console.log(data)
                         })}>
                             <div className="space-y-12">
                                 <div className="border-b border-gray-900/10 pb-12">
@@ -200,9 +199,10 @@ const Checkout = () => {
                                         Choose from existing addresses
                                     </p>
                                     <ul role="list" className="divide-y divide-gray-100">
-                                        {user.addresses && user.addresses.map((address, index) => (
+                                        {user && user.addresses.map((address, index) => (
                                             <li key={index} className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                                                 <div className="flex min-w-0 gap-x-4">
+                                                {console.log("address:- " + address)}
                                                     <input
                                                         onChange={handleAddress}
                                                         name="address"
