@@ -31,7 +31,7 @@ const Checkout = () => {
     const dispatch = useDispatch();
 
     const handleUpdate = (e, item) => {
-        dispatch(updateCartAsync({ id:item.id, quantity: +e.target.value }))
+        dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }))
     }
     const handleRemove = (e, id) => {
         dispatch(deleteItemFromCartAsync(id))
@@ -43,41 +43,41 @@ const Checkout = () => {
     const handlePayment = (e) => {
         setPaymentMenthod(e.target.value)
     }
-    const handleOrder = (e) =>{
-        if(selectedAddress && paymentMenthod){
+    const handleOrder = (e) => {
+        if (selectedAddress && paymentMenthod) {
             const order = {
-                items, 
-                totalAmount, 
-                totalItems, 
-                user: user.id, 
-                paymentMenthod, 
+                items,
+                totalAmount,
+                totalItems,
+                user: user.id,
+                paymentMenthod,
                 selectedAddress,
                 status: 'pending'
             }
             dispatch(createOrderAsync(order))
-        }else {
+        } else {
             alert('Enter Address and Payment method');
         }
-        
+
     }
     return (
         <>
             {!items.length && checkoutLoaded && <Navigate to='/' replace={true}></Navigate>}
             {currentOrder && (
-            currentOrder.paymentMenthod==='cash' && 
-            <Navigate 
-             to= {`/order-success/${currentOrder.id}`} 
-             replace={true}
-             >
-             </Navigate>)}
+                currentOrder.paymentMenthod === 'cash' &&
+                <Navigate
+                    to={`/order-success/${currentOrder.id}`}
+                    replace={true}
+                >
+                </Navigate>)}
 
-             {currentOrder && 
-            currentOrder.paymentMenthod==='card' &&( 
-            <Navigate 
-             to= {`/stripe-checkout/`} 
-             replace={true}
-             >
-             </Navigate>)}
+            {currentOrder &&
+                currentOrder.paymentMenthod === 'card' && (
+                    <Navigate
+                        to={`/stripe-checkout/`}
+                        replace={true}
+                    >
+                    </Navigate>)}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className="lg:col-span-3 py-12">
@@ -216,7 +216,7 @@ const Checkout = () => {
                                         {user && user.addresses.map((address, index) => (
                                             <li key={index} className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                                                 <div className="flex min-w-0 gap-x-4">
-                                                {console.log("address:- " + address)}
+                                                    {console.log("address:- " + address)}
                                                     <input
                                                         onChange={handleAddress}
                                                         name="address"
@@ -250,7 +250,7 @@ const Checkout = () => {
                                                         name="payments"
                                                         value="cash"
                                                         type="radio"
-                                                        checked={paymentMenthod === "cash" }
+                                                        checked={paymentMenthod === "cash"}
                                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                     <label htmlFor="cash" className="block text-sm font-medium leading-6 text-gray-900">
@@ -264,7 +264,7 @@ const Checkout = () => {
                                                         name="payments"
                                                         value="card"
                                                         type="radio"
-                                                        checked={paymentMenthod === "card" }
+                                                        checked={paymentMenthod === "card"}
                                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                     <label htmlFor="card" className="block text-sm font-medium leading-6 text-gray-900">

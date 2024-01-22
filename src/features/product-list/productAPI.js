@@ -1,6 +1,6 @@
 export function fetchAllProducts() {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" http://localhost:8080/products")
+    const responce = await fetch(" /products")
     const data = await responce.json()
     resolve({ data })
   }
@@ -9,7 +9,7 @@ export function fetchAllProducts() {
 // categories
 export function fetchCategories() {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" http://localhost:8080/categories")
+    const responce = await fetch(" /categories")
     const data = await responce.json()
     resolve({ data })
   }
@@ -18,7 +18,7 @@ export function fetchCategories() {
 //brands
 export function fetchBrands() {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" http://localhost:8080/brands")
+    const responce = await fetch(" /brands")
     const data = await responce.json()
     resolve({ data })
   }
@@ -27,7 +27,7 @@ export function fetchBrands() {
 // product by id
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" http://localhost:8080/products/"+id)
+    const responce = await fetch(" /products/"+id)
     const data = await responce.json()
     resolve({ data })
   }
@@ -59,7 +59,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
   return new Promise(async (resolve) =>{
     //TODO: we will not hard-code server URL here
-    const response = await fetch('http://localhost:8080/products?'+queryString) 
+    const response = await fetch('/products?'+queryString) 
     const data = await response.json()
     const totalItems = response.headers.get("X-Total-Count")
     resolve({data:{products: data, totalItems: totalItems}})
@@ -71,7 +71,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 // admin APIs
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" http://localhost:8080/products/",{
+    const responce = await fetch(" /products/",{
       method: 'POST',
       body: JSON.stringify(product),
       headers: {'content-type': 'application/json'}
@@ -84,7 +84,7 @@ export function createProduct(product) {
 // update product
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
-    const responce = await fetch("http://localhost:8080/products/"+update.id,{
+    const responce = await fetch("/products/"+update.id,{
       method: 'PATCH',
       body: JSON.stringify(update),
       headers: {'content-type': 'application/json'}
