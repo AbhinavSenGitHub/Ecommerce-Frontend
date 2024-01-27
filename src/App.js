@@ -89,7 +89,7 @@ const router = createBrowserRouter([
     element: <OrderSuccessPage></OrderSuccessPage>
   },
   {
-    path: "/orders",
+    path: "/my-orders",
     element: <Protected><UserOrderPage></UserOrderPage></Protected>
   },
   {

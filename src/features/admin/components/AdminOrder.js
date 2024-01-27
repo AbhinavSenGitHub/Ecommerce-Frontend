@@ -25,7 +25,12 @@ const AdminOrder = () => {
         dispatch(updateOrderAsync(updateOrder))
         setEditableOrder(-1)
     }
-
+    const handleOrderPaymentStatus = (e, order) => {
+        const updateOrder = { ...order, paymentStatus:e.target.value }
+        console.log(updateOrder)
+        dispatch(updateOrderAsync(updateOrder))
+        setEditableOrder(-1)
+    }
     const handlePage = (page) => {
         setPage(page)
     }
@@ -45,6 +50,8 @@ const AdminOrder = () => {
               return 'bg-yellow-200 text-yellow-600';
             case 'delivered':
               return 'bg-green-200 text-green-600';
+            case 'received':
+              return 'bg-green-200 text-green-600';
             case 'cancelled':
               return 'bg-red-200 text-red-600';
             default:
@@ -63,7 +70,7 @@ const AdminOrder = () => {
             <div className=" flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
                 <div className="w-full">
                     <div className="bg-white shadow-md rounded my-6">
-                        <table className="min-w-max w-full table-auto">
+                        <table className="w-full table-auto">
                             <thead>
                                 <tr>
                                     <th
@@ -104,7 +111,9 @@ const AdminOrder = () => {
                                             ))}
                                     </th>
                                     <th className="py-3 px-6 text-center">Shipping Address</th>
-                                    <th className="py-3 px-6 text-center">Status</th>
+                                    <th className="py-3 px-6 text-center">Order Status</th>
+                                    <th className="py-3 px-6 text-center">Payment Menthod</th>
+                                    <th className="py-3 px-6 text-center">Payment Status</th>
                                     <th className="py-3 px-6 text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -157,6 +166,22 @@ const AdminOrder = () => {
                                             </select>) :
                                             (<span className={`${changeColor(order.status)} py-1 px-3 rounded-full text-xs`}>
                                                 {order.status}
+                                            </span>)}
+                                    </td>
+                                    <td className="py-3 px-6 text-center">
+                                        <div className="flex items-center justify-center">
+                                            {order.paymentMenthod}
+                                        </div>
+                                    </td>
+                                    <td className="py-3 px-6 text-center">
+                                        {order.id === editableOrder ? (
+                                            <select onChange={(e) => handleOrderPaymentStatus(e, order)}>
+                                                <option value="status">--status--</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="received">Received</option>
+                                            </select>) :
+                                            (<span className={`${changeColor(order.paymentStatus)} py-1 px-3 rounded-full text-xs`}>
+                                                {order.paymentStatus}
                                             </span>)}
                                     </td>
                                     <td className="py-3 px-6 text-center">
