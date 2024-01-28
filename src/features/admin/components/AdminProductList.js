@@ -17,8 +17,8 @@ import { Link } from 'react-router-dom';
 import { ITEMS_PER_PAGE } from '../../../app/constant';
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: "desc", current: false },
-  { name: 'Price: Low to High', sort: 'price', order: "asc", current: false },
-  { name: 'Price: High to Low', sort: 'price', order: "desc", current: false },
+  { name: 'Price: Low to High', sort: 'discountPrice', order: "asc", current: false },
+  { name: 'Price: High to Low', sort: 'discountPrice', order: "desc", current: false },
 ]
 
 const items = [

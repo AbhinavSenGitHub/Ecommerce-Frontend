@@ -2,25 +2,13 @@ import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProductByIdAsync, selectProductById } from '../../product-list/productSlice';
+import { fetchProductByIdAsync, selectProductById, selectProductStatus } from '../../product-list/productSlice'
 import { Link, useParams } from 'react-router-dom';
-import { addToCartAsync } from '../../cart/cartSlice';
-import { discountPrice } from '../../../app/constant';
-const colors = [
-  { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-  { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-  { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-]
-const sizes = [
-  { name: 'XXS', inStock: false },
-  { name: 'XS', inStock: true },
-  { name: 'S', inStock: true },
-  { name: 'M', inStock: true },
-  { name: 'L', inStock: true },
-  { name: 'XL', inStock: true },
-  { name: '2XL', inStock: true },
-  { name: '3XL', inStock: true },
-]
+import { addToCartAsync, selectedItem } from '../../cart/cartSlice';
+import { useAlert } from "react-alert";
+import { Grid } from 'react-loader-spinner';
+
+
 const highlights = [
   'Hand cut and sewn locally',
   'Dyed with our proprietary colors',
@@ -32,17 +20,32 @@ function classNames(...classes) {
 }
 
 export default function AdminProductDetails() {
-  const [selectedColor, setSelectedColor] = useState(colors[0])
-  const [selectedSize, setSelectedSize] = useState(sizes[2])
+  const [selectedColor, setSelectedColor] = useState()
+  const [selectedSize, setSelectedSize] = useState()
   const product = useSelector(selectProductById)
+  const alert = useAlert();
   const dispatch = useDispatch();
   const params = useParams()
-
+  const items = useSelector(selectedItem)
+  const status = useSelector(selectProductStatus)
   const handleCart = (e) => {
     e.preventDefault()
-    const newItem = { ...product, quantity: 1 }
-    delete newItem['id']
-    dispatch(addToCartAsync(newItem))
+    if (items.findIndex((item) => item.product.id === product.id) < 0) {   //
+      const newItem = {
+        product: product.id,
+        quantity: 1
+      }
+      if(selectedColor){
+        newItem.color = selectedColor
+      }
+      if(selectedSize){
+        newItem.size = selectedSize
+      } 
+      dispatch(addToCartAsync(newItem));
+      alert.success("Item Added to your cart successfully")
+    } else {
+      alert.success("Item already added")
+    }
   }
   useEffect(() => {
     dispatch(fetchProductByIdAsync(params.id))
@@ -50,6 +53,16 @@ export default function AdminProductDetails() {
 
   return (
     <div className="bg-white">
+      {status === 'loading' ? <Grid
+        visible={true}
+        height="80"
+        width="80"
+        color="rgba(79,70,229)"
+        ariaLabel="grid-loading"
+        radius="12.5"
+        wrapperStyle={{}}
+        wrapperClass="grid-wrapper"
+      /> : null}
       {product && <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -124,7 +137,7 @@ export default function AdminProductDetails() {
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
             <p className="text-3xl line-through tracking-tight text-gray-900">{product.price}</p>
-            <p className="text-3xl tracking-tight text-gray-900">{discountPrice(product)}</p>
+            <p className="text-3xl tracking-tight text-gray-900">{product.discountPrice}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -148,13 +161,13 @@ export default function AdminProductDetails() {
 
             <form className="mt-10">
               {/* Colors */}
-              <div>
+              {product.colors && product.colors.length > 0 &&<div>
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                   <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                   <div className="flex items-center space-x-3">
-                    {colors && colors.map((color) => (
+                    {product.colors.map((color) => (
                       <RadioGroup.Option
                         key={color.name}
                         value={color}
@@ -181,10 +194,10 @@ export default function AdminProductDetails() {
                     ))}
                   </div>
                 </RadioGroup>
-              </div>
+              </div>}
 
               {/* Sizes */}
-              <div className="mt-10">
+              {product.sizes && product.sizes.length > 0 && <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
                   <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
@@ -195,7 +208,7 @@ export default function AdminProductDetails() {
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                   <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                    {sizes && sizes.map((size) => (
+                    {product.sizes.map((size) => (
                       <RadioGroup.Option
                         key={size.name}
                         value={size}
@@ -243,18 +256,16 @@ export default function AdminProductDetails() {
                     ))}
                   </div>
                 </RadioGroup>
-              </div>
+              </div>}
 
               <button
-                to="/cart"
                 onClick={handleCart}
                 type="submit"
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                <Link
-                  to="/cart">
-                  Add to Cart
-                </Link>
+
+                Add to Cart
+
               </button>
             </form>
           </div>
@@ -269,18 +280,18 @@ export default function AdminProductDetails() {
               </div>
             </div>
 
-            <div className="mt-10">
+            {product.highlights.length > 0 && <div className="mt-10">
               <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {highlights.map((highlight) => (
+                  {product.highlights.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
+            </div>}
 
             <div className="mt-10">
               <h2 className="text-sm font-medium text-gray-900">Details</h2>

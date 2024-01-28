@@ -6,7 +6,6 @@ import { fetchProductByIdAsync, selectProductById, selectProductStatus } from '.
 import { Link, useParams } from 'react-router-dom';
 import { addToCartAsync, selectedItem } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
-import { discountPrice } from '../../../app/constant';
 import { useAlert } from "react-alert";
 import { Grid } from 'react-loader-spinner';
 
@@ -43,8 +42,8 @@ export default function ProductDetails() {
       if(selectedSize){
         newItem.size = selectedSize
       } 
-      dispatch(addToCartAsync(newItem));
-      alert.success("Item Added to your cart successfully")
+      dispatch(addToCartAsync({item:newItem, alert}));
+      
     } else {
       alert.success("Item already added")
     }
@@ -139,7 +138,7 @@ export default function ProductDetails() {
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
             <p className="text-3xl line-through tracking-tight text-gray-900">{product.price}</p>
-            <p className="text-3xl tracking-tight text-gray-900">{discountPrice(product)}</p>
+            <p className="text-3xl tracking-tight text-gray-900">{product.discountPrice}</p>
 
             {/* Reviews */}
             <div className="mt-6">

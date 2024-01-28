@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ITEMS_PER_PAGE, discountPrice } from '../../../app/constant'
+import { ITEMS_PER_PAGE } from '../../../app/constant'
 import { fetchAllOrdersAsync, selectOrders, selectTotalOrders, updateOrderAsync } from '../../order/orderSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { XMarkIcon, EyeIcon, PencilIcon, ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline'
@@ -169,7 +169,7 @@ const AdminOrder = () => {
                                                     alt={item.product.title}
                                                 />
                                             </div>
-                                            <span>{item.product.title} - #{item.quantity} - ${discountPrice(item.product)}</span>
+                                            <span>{item.product.title} - #{item.quantity} - ${item.product.discountPrice}</span>
                                         </div>)}
                                     </td>
                                     <td className="py-3 px-2 text-center">

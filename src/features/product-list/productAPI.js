@@ -1,6 +1,6 @@
 export function fetchAllProducts() {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" /products")
+    const responce = await fetch("/products")
     const data = await responce.json()
     resolve({ data })
   }
@@ -9,7 +9,7 @@ export function fetchAllProducts() {
 // categories
 export function fetchCategories() {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" /categories")
+    const responce = await fetch("/categories")
     const data = await responce.json()
     resolve({ data })
   }
@@ -27,7 +27,7 @@ export function fetchBrands() {
 // product by id
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" /products/"+id)
+    const responce = await fetch("/products/"+id)
     const data = await responce.json()
     resolve({ data })
   }
@@ -40,8 +40,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
   for(let key in filter){
     const categoryValue = filter[key]
     if(categoryValue.length){
-      const lastCategoryValue = categoryValue[categoryValue.length-1]
-      queryString += `${key}=${lastCategoryValue}&`
+      queryString += `${key}=${categoryValue}&`
     }
   }
 // sort
@@ -71,7 +70,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 // admin APIs
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    const responce = await fetch(" /products/",{
+    const responce = await fetch("/products/",{
       method: 'POST',
       body: JSON.stringify(product),
       headers: {'content-type': 'application/json'}

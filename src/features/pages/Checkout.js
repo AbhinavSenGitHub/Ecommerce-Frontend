@@ -12,15 +12,16 @@ import { Link, Navigate } from 'react-router-dom';
 import { deleteItemFromCartAsync, selectedItem, updateCartAsync } from '../cart/cartSlice';
 import { useForm } from 'react-hook-form';
 import { selectcheckoutLoaded, updateUserAsync } from '../user/userSlice';
-import { createOrderAsync, selectCurrentOrder } from '../order/orderSlice';
+import { createOrderAsync, selectCurrentOrder, selectStatus } from '../order/orderSlice';
 import { selectUserInfo } from '../user/userSlice';
-import { discountPrice } from '../../app/constant';
+import { Grid } from 'react-loader-spinner';
+
 
 
 const Checkout = () => {
     const [open, setOpen] = useState(true)
     const items = useSelector(selectedItem)
-    const totalAmount = items.reduce((amount, item) => discountPrice(item.product) * item.quantity + amount, 0)
+    const totalAmount = items.reduce((amount, item) => item.product.discountPrice * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const user = useSelector(selectUserInfo)
@@ -29,7 +30,7 @@ const Checkout = () => {
     const currentOrder = useSelector(selectCurrentOrder)
     const checkoutLoaded = useSelector(selectcheckoutLoaded)
     const dispatch = useDispatch();
-
+    const status = useSelector(selectStatus)
     const handleUpdate = (e, item) => {
         dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }))
     }
@@ -78,6 +79,17 @@ const Checkout = () => {
                         replace={true}
                     >
                     </Navigate>)}
+
+            {status === 'loading' ? (<Grid
+                visible={true}
+                height="80"
+                width="80"
+                color="rgba(79,70,229)"
+                ariaLabel="grid-loading"
+                radius="12.5"
+                wrapperStyle={{}}
+                wrapperClass="grid-wrapper"
+            />) : 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className="lg:col-span-3 py-12">
@@ -305,7 +317,7 @@ const Checkout = () => {
                                                             <h3>
                                                                 <a href={item.product.href}>{item.product.title}</a>
                                                             </h3>
-                                                            <p className="ml-4">{discountPrice(item.product)}</p>
+                                                            <p className="ml-4">{item.product.discountPrice}</p>
                                                         </div>
                                                         <p className="mt-1 text-sm text-gray-500">{item.product.brand}</p>
                                                     </div>
@@ -374,7 +386,8 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
+
         </>
     )
 }

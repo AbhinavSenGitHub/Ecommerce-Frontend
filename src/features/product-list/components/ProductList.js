@@ -16,12 +16,12 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon, StarIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ChevronLeftIcon, ChevronRightIcon, LinkIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom';
-import { ITEMS_PER_PAGE, discountPrice } from '../../../app/constant';
+import { ITEMS_PER_PAGE } from '../../../app/constant';
 import Pagination from '../../common/Pagination';
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: "desc", current: false },
-  { name: 'Price: Low to High', sort: 'price', order: "asc", current: false },
-  { name: 'Price: High to Low', sort: 'price', order: "desc", current: false },
+  { name: 'Price: Low to High', sort: 'discountPrice', order: "asc", current: false },
+  { name: 'Price: High to Low', sort: 'discountPrice', order: "desc", current: false },
 ]
 
 function classNames(...classes) {
@@ -380,7 +380,7 @@ function ProductGrid({ products, status }) {
                       </p>}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">$ {discountPrice(product)}</p>
+                      <p className="text-sm font-medium text-gray-900">$ {product.discountPrice}</p>
                       <p className="text-sm font-medium line-through text-gray-400">$ {product.price}</p>
                     </div>
                   </div>
