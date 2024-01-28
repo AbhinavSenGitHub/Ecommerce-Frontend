@@ -72,9 +72,9 @@ const AdminOrder = () => {
                     <div className="bg-white shadow-md rounded my-6">
                         <table className="w-full table-auto">
                             <thead>
-                                <tr>
+                                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th
-                                        className="py-3 px-6 text-left cursor-pointer"
+                                        className="py-3 px-2 text-left cursor-pointer"
                                         onClick={(e) =>
                                             handleSort({
                                                 sort: 'id',
@@ -91,10 +91,10 @@ const AdminOrder = () => {
                                             ))}
                                     </th>
 
-                                    <th className="py-3 px-6 text-left">Items</th>
+                                    <th className="py-3 px-2 text-left">Items</th>
 
                                     <th
-                                        className="py-3 px-6 text-left cursor-pointer"
+                                        className="py-3 px-2 text-left cursor-pointer"
                                         onClick={(e) =>
                                             handleSort({
                                                 sort: 'totalAmount',
@@ -110,23 +110,57 @@ const AdminOrder = () => {
                                                 <ArrowDownIcon className="w-4 h-4 inline"></ArrowDownIcon>
                                             ))}
                                     </th>
-                                    <th className="py-3 px-6 text-center">Shipping Address</th>
-                                    <th className="py-3 px-6 text-center">Order Status</th>
-                                    <th className="py-3 px-6 text-center">Payment Menthod</th>
-                                    <th className="py-3 px-6 text-center">Payment Status</th>
-                                    <th className="py-3 px-6 text-center">Actions</th>
+                                    <th className="py-3 px-2 text-center">Shipping Address</th>
+                                    <th className="py-3 px-2 text-center">Order Status</th>
+                                    <th className="py-3 px-2 text-center">Payment Menthod</th>
+                                    <th className="py-3 px-2 text-center">Payment Status</th>
+                                    <th
+                                        className="py-3 px-2 text-left cursor-pointer"
+                                        onClick={(e) =>
+                                            handleSort({
+                                                sort: 'createdAt',
+                                                order: sort?._order === 'asc' ? 'desc' : 'asc',
+                                            })
+                                        }
+                                    >
+                                        Order Time {' '}
+                                        {sort._sort === 'createdAt' &&
+                                            (sort._order === 'asc' ? (
+                                                <ArrowUpIcon className="w-4 h-4 inline"></ArrowUpIcon>
+                                            ) : (
+                                                <ArrowDownIcon className="w-4 h-4 inline"></ArrowDownIcon>
+                                            ))}
+                                    </th>
+                                    <th
+                                        className="py-3 px-2 text-left cursor-pointer"
+                                        onClick={(e) =>
+                                            handleSort({
+                                                sort: 'updatedAt',
+                                                order: sort?._order === 'asc' ? 'desc' : 'asc',
+                                            })
+                                        }
+                                    >
+                                        Last Updated {' '}
+                                        {sort._sort === 'updatedAt' &&
+                                            (sort._order === 'asc' ? (
+                                                <ArrowUpIcon className="w-4 h-4 inline"></ArrowUpIcon>
+                                            ) : (
+                                                <ArrowDownIcon className="w-4 h-4 inline"></ArrowDownIcon>
+                                            ))}
+                                    </th>
+                                    <th className="py-3 px-2 text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
                                 {orders.map(order => <tr className="border-b border-gray-200 hover:bg-gray-100">
-                                    <td className="py-3 px-6 text-left whitespace-nowrap">
+                                    <td className="py-3 px-2 text-left whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="mr-2">
                                             </div>
                                             <span className="font-medium">{order.id}</span>
                                         </div>
                                     </td>
-                                    <td className="py-3 px-6 text-left">
+                                    <td className="py-3 px-2 text-left">
                                         {order.items.map(item => <div className="flex p-4 items-center">
                                             <div className="mr-2">
                                                 <img
@@ -138,12 +172,12 @@ const AdminOrder = () => {
                                             <span>{item.product.title} - #{item.quantity} - ${discountPrice(item.product)}</span>
                                         </div>)}
                                     </td>
-                                    <td className="py-3 px-6 text-center">
+                                    <td className="py-3 px-2 text-center">
                                         <div className="flex items-center justify-center">
                                             ${order.totalAmount}
                                         </div>
                                     </td>
-                                    <td className="py-3 px-6 text-center">
+                                    <td className="py-3 px-2 text-center">
                                         {order.selectedAddress && <div className="">
                                             <div>
                                                 <strong>{order.selectedAddress.name}</strong>,
@@ -155,7 +189,7 @@ const AdminOrder = () => {
                                             <div>{order.selectedAddress.phone}, </div>
                                         </div>}
                                     </td>
-                                    <td className="py-3 px-6 text-center">
+                                    <td className="py-3 px-2 text-center">
                                         {order.id === editableOrder ? (
                                             <select onChange={(e) => handleOrderStatus(e, order)}>
                                                 <option value="status">--status--</option>
@@ -168,12 +202,12 @@ const AdminOrder = () => {
                                                 {order.status}
                                             </span>)}
                                     </td>
-                                    <td className="py-3 px-6 text-center">
+                                    <td className="py-3 px-2 text-center">
                                         <div className="flex items-center justify-center">
                                             {order.paymentMenthod}
                                         </div>
                                     </td>
-                                    <td className="py-3 px-6 text-center">
+                                    <td className="py-3 px-2 text-center">
                                         {order.id === editableOrder ? (
                                             <select onChange={(e) => handleOrderPaymentStatus(e, order)}>
                                                 <option value="status">--status--</option>
@@ -184,7 +218,17 @@ const AdminOrder = () => {
                                                 {order.paymentStatus}
                                             </span>)}
                                     </td>
-                                    <td className="py-3 px-6 text-center">
+                                    <td className="py-3 px-2 text-center">
+                                        <div className="flex items-center justify-center">
+                                            {order.createdAt ? new Date(order.createdAt).toLocaleString(): null}
+                                        </div>
+                                    </td>
+                                    <td className="py-3 px-2 text-center">
+                                        <div className="flex items-center justify-center">
+                                            {order.updatedAt ? new Date(order.updatedAt).toLocaleString(): null}
+                                        </div>
+                                    </td>
+                                    <td className="py-3 px-2 text-center">
                                         <div className="flex item-center justify-center">
                                             <div className="w-4 mr-5 transform hover:text-purple-500 hover:scale-110">
                                                 <EyeIcon className="w-5 h-5" onClick={e => handleShow()}></EyeIcon>

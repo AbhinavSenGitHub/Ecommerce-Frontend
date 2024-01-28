@@ -10,7 +10,7 @@ const ProtectedAdmin = ({children}) => {
     if(!user){
         return <Navigate to="/login" replace={true}></Navigate>     // if user not found then <Navigate></Navigate> is tag that comes from react-router-dom to redirect to the login page.
       }
-    if(user && userInfo.role !== 'admin'){
+    if(userInfo && userInfo.role !== 'admin'){
         return <Navigate to="/" replace={true}></Navigate>     // if user not found then <Navigate></Navigate> is tag that comes from react-router-dom to redirect to the login page.
       }
       return children

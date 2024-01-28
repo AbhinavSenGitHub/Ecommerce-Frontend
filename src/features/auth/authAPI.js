@@ -53,8 +53,18 @@ export function checkAuth() {
 }
 
 export function signOut(userId) {
-  return new Promise(async (resolve) => {
-    resolve({ data: 'success' })
+  return new Promise(async (resolve, reject) => {
+    try{
+      const responce = await fetch("/auth/logout")
+      if(responce.ok){
+        resolve({ data: "success" })
+      }else{
+        const err = await responce.text()
+        reject(err)
+      }
+    } catch (err){
+      reject({err})
+    }
   }
   )
 }
