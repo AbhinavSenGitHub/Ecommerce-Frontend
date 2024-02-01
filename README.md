@@ -1,46 +1,39 @@
-# Getting Started with Create React App and Redux
+E-Commerce Platform README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Welcome to our E-Commerce Platform! This platform is designed to provide a seamless online shopping experience. Below, you'll find essential information to get started.
+## Website Link
 
-## Available Scripts
+Visit our E-commerce website: https://ecommerce-backend-sigma-eight.vercel.app/login
+## Project Demo  
 
-In the project directory, you can run:
+#Product Details
 
-### `npm start`
+![Screenshot (64)](https://github.com/AbhinavSenGitHub/EcommerceFinal/assets/112618498/f89f12da-7d06-45cc-b11a-7f32faeb0944)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#Admin Order Page
+![Screenshot (65)](https://github.com/AbhinavSenGitHub/EcommerceFinal/assets/112618498/898f36bf-abb4-4d2d-b1c2-b24d3b827ca2)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#Admin Product Page 
+![Screenshot (67)](https://github.com/AbhinavSenGitHub/EcommerceFinal/assets/112618498/231fb0d0-7883-45da-bfef-435aa667ec33)
+order success mail
+![Alt Text](https://github.com/AbhinavSenGitHub/EcommerceFinal/assets/112618498/192edd4f-f7c1-4c73-841c-bd275c735cf9)
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Order Success Email
+Customers receive an email confirmation upon successful order placement. This email includes details about the order and the transaction.
 
-### `npm run build`
+## Payment Gateway
+We use a secure payment gateway to ensure safe and smooth transactions. Multiple payment options are available, providing convenience for our users.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Product Filtering
+Users can filter products based on categories and brands, making it easy to find exactly what they're looking for.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Pagination
+To enhance user experience, product listings are paginated. This helps in navigating through a large number of products efficiently.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Admin Site
+Manage your e-commerce business effortlessly with the admin site. Access sales data, update product information, and more.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Sorting Options
+Products can be sorted based on various criteria, including best rating and price. Choose from low to high or high to low to find products that match your preferences.
